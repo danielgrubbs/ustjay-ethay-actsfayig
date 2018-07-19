@@ -21,14 +21,20 @@ def get_fact():
 def home():
 
     fact = get_fact().strip()
-    # Submitting so use a POST request
-    body = requests.post("https://hidden-journey-62459.herokuapp.com/piglatinize/",
-                         data={'input_text': fact},
-                         allow_redirects=False)
+    # Submitting so use a POST reques
+    # body = requests.post("https://hidden-journey-62459.herokuapp.com/piglatinize/",
+    #                      data={'input_text': fact},
+    #                      allow_redirects=False)
+
+    # Switch up from above code following along 
+    # http://docs.python-requests.org/en/master/user/quickstart/
+    url = "https://hidden-journey-62459.herokuapp.com/piglatinize/"
+    payload = {'input_text': fact}
+    r = requests.post(url, data=payload, allow_redirects=False)
 
     template = """
     <a href={}>{}</a>
-    """.format(body.headers['location'], body.headers['location'])
+    """.format(r.headers['location'], r.headers['location'])
 
     return template
 
